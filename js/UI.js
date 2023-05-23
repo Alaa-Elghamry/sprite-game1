@@ -8,7 +8,7 @@ export class UI {
     }
     draw(context){
          // ammo
-         context.fillstyle = this.color;
+         context.fillStyle = this.color;
          for (let i = 0; i < this.game.ammo; i++){
              context.fillRect(20 + 8*i, 50, 3, 20);
          }}    

@@ -21,15 +21,22 @@ window.addEventListener('load', function () {
       this.y = 0;
       this.keys = [];
       this.enemies = [];
+      this.enemyTimer = 0;
+      this.enemyInterval = 1000;
+
       this.ammo = 20;
       this.maxAmmo = 50;
       this.ammoTimer = 0;
       this.ammoInterval = 500;
+      this.score = 0
+
+      this.gameOver = false;
 
       this.player = new Player(this);
       this.projectile = new Projectile(this);
       this.input = new InputHandler(this);
       this.ui = new UI(this);
+      // this.enemy = new Enemy(this);
       
     }
     update(deltaTime) {
@@ -46,9 +53,33 @@ window.addEventListener('load', function () {
 
       this.enemies.forEach(enemy => {
         enemy.update()
+        if (this.checkColllision(this.player,enemy)) {
+          enemy.markedForDeletion = true
+        }
+        this.player.projectiles.forEach(projectile => {
+          if (this.checkColllision(projectile,enemy)) {
+            projectile.markedForDeletion = true;
+            enemy.lives-- ;
+            if (enemy.lives === 0) {
+          enemy.markedForDeletion = true;
+          this.score += enemy.score
+          }
+      }})
+
+
       });
 
+
+
+     // filter the marked for deletion enemies from the array
       this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion );
+
+      if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
+        this.addEnemy();
+        this.enemyTimer = 0;
+      }else{
+        this.enemyTimer += deltaTime;
+      }
     }
 
     draw(context) {
@@ -59,6 +90,17 @@ window.addEventListener('load', function () {
       this.enemies.forEach(enemy => {
         enemy.draw(context)
       });
+    }
+
+    addEnemy(){
+      this.enemies.push(new Angler1(this));
+    }  
+    checkColllision (rect1,rect2){
+      return (rect1.x < rect2.x + rect2.width &&
+          rect1.x + rect1.width > rect2.x  &&
+          rect1.y < rect2.y + rect2.height &&
+          rect1.y + rect1.height > rect2.y )  
+      
     }
   }
 

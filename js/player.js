@@ -1,5 +1,6 @@
 
 import { Projectile } from './Projectile.js';
+import { Enemy } from './Enemy.js';
 const playerImage = new Image();
 playerImage.src = 'assets/imgs/player.png';
 export class Player {
