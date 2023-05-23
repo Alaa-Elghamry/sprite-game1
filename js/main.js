@@ -3,6 +3,8 @@ import { UI } from './UI.js';
 import { Projectile } from './Projectile.js';
 import { InputHandler } from './InputHandle.js';
 import { Angler1 } from './Enemy.js';
+import { Angler2 } from './Enemy.js';
+import { LuckyFish } from './Enemy.js';
 import { Background } from './Background.js';
 
 window.addEventListener('load', function () {
@@ -101,7 +103,12 @@ window.addEventListener('load', function () {
     }
 
     addEnemy(){
-      this.enemies.push(new Angler1(this));
+      const randomize = Math.random()
+if (randomize < 0.3) {
+  this.enemies.push(new Angler1(this));
+    } else if (randomize < 0.6) {
+      this.enemies.push(new Angler2(this));
+    } else  this.enemies.push(new LuckyFish(this));
     }  
     checkColllision (rect1,rect2){
       return (rect1.x < rect2.x + rect2.width &&
