@@ -1,4 +1,4 @@
-export class Layer {
+class Layer {
     constructor (game, image, speedModifier){
        this.game = game;
        this.image = image;

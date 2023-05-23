@@ -2,7 +2,6 @@ import { Player } from './Player.js';
 import { UI } from './UI.js';
 import { Projectile } from './Projectile.js';
 import { InputHandler } from './InputHandle.js';
-import { Enemy } from './Enemy.js';
 import { Angler1 } from './Enemy.js';
 import { Background } from './Background.js';
 

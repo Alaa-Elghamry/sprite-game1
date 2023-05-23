@@ -1,6 +1,5 @@
 
 import { Projectile } from './Projectile.js';
-import { Enemy } from './Enemy.js';
 const playerImage = new Image();
 playerImage.src = 'assets/imgs/player.png';
 export class Player {
@@ -11,6 +10,10 @@ export class Player {
         this.x = 20;
         this.y = 250;
         this.image = document.getElementById('player');
+        this.frameX= 0;
+        this.frameY  = 0;
+        this.maxFrame = 37
+
         this.speedY = 0;
         this.speedX = 0;
         this.speedY = 0;
@@ -35,11 +38,19 @@ export class Player {
         })
 
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
+
+        //sprite animation
+    if (this.frameX <  this.maxFrame){
+         this.frameX++;
+    } else
+         this.frameX = 0;
+    
     }
     draw(context) {
-        context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
-        // context.fillStyle = 'black'
-        // context.fillRect(this.x, this.y, this.width, this.height);
+        // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
+        context.drawImage(playerImage, this.frameX * this.width, this.frameY * this.height, this.
+       width, this.height, this.x, this.y, this.width,this.height)
+             
         this.projectiles.forEach(projectile => {
             projectile.draw(context)
         })
