@@ -6,7 +6,7 @@ export class Projectile {
         this.y = y;
         this.width = 10;
         this.height = 3;
-        this.speed = 3;
+        this.speed = 10;
         this.markedForDeletion = false
     }
 

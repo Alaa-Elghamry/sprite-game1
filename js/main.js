@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.score = 0
-
+      this.winningScore = 50;
       this.gameOver = false;
 
       this.player = new Player(this);
@@ -63,6 +63,9 @@ window.addEventListener('load', function () {
             if (enemy.lives === 0) {
           enemy.markedForDeletion = true;
           this.score += enemy.score
+          if (this.score > this.winningScore) {
+            this.gameOver = true;
+          }
           }
       }})
 
@@ -84,7 +87,7 @@ window.addEventListener('load', function () {
 
     draw(context) {
       // this.update()
-
+     
       this.player.draw(context);
       this.ui.draw(context);
       this.enemies.forEach(enemy => {
