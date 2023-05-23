@@ -4,12 +4,13 @@ import { Projectile } from './Projectile.js';
 import { InputHandler } from './InputHandle.js';
 import { Enemy } from './Enemy.js';
 import { Angler1 } from './Enemy.js';
+import { Background } from './Background.js';
 
 window.addEventListener('load', function () {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
   canvas.width = 1280;
-  canvas.height = 720;
+  canvas.height = 500;
 
 
   // Main Game Class
@@ -23,7 +24,7 @@ window.addEventListener('load', function () {
       this.enemies = [];
       this.enemyTimer = 0;
       this.enemyInterval = 1000;
-
+      this.speed = 1 ;
       this.ammo = 20;
       this.maxAmmo = 50;
       this.ammoTimer = 0;
@@ -36,11 +37,14 @@ window.addEventListener('load', function () {
       this.projectile = new Projectile(this);
       this.input = new InputHandler(this);
       this.ui = new UI(this);
+      this.background = new Background(this);
       // this.enemy = new Enemy(this);
       
     }
     update(deltaTime) {
       this.player.update();
+      this.background.update();
+      this.background.layer4.update();
       if (this.ammoTimer > this.ammoInterval) {
         if (this.ammo < this.maxAmmo) {
           this.ammo++;
@@ -87,12 +91,14 @@ window.addEventListener('load', function () {
 
     draw(context) {
       // this.update()
-     
+      this.background.draw(context);
       this.player.draw(context);
       this.ui.draw(context);
       this.enemies.forEach(enemy => {
         enemy.draw(context)
       });
+      this.background.layer4.draw(context);
+
     }
 
     addEnemy(){
