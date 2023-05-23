@@ -1,5 +1,5 @@
 
-import { Projectile } from './projectile.js';
+import { Projectile } from './Projectile.js';
 const playerImage = new Image();
 playerImage.src = 'assets/imgs/player.png';
 export class Player {
@@ -11,6 +11,8 @@ export class Player {
         this.y = 250;
         this.image = document.getElementById('player');
         this.speedY = 0;
+        this.speedX = 0;
+        this.speedY = 0;
         this.maxSpeed = 2;
         this.projectiles = []
 
@@ -21,6 +23,11 @@ export class Player {
         else this.speedY = 0
         this.y += this.speedY;
 
+        if (this.game.keys.includes('ArrowRight')) this.speedX = -this.maxSpeed;
+        else if (this.game.keys.includes('ArrowLeft')) this.speedX = this.maxSpeed;
+        else this.speedX = 0
+        this.x -= this.speedX;
+
         // Handle Projectiles
         this.projectiles.forEach(projectile => {
             projectile.update()
@@ -29,16 +36,16 @@ export class Player {
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
     }
     draw(context) {
-        // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
-        context.fillStyle = 'black'
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
+        // context.fillStyle = 'black'
+        // context.fillRect(this.x, this.y, this.width, this.height);
         this.projectiles.forEach(projectile => {
             projectile.draw(context)
         })
     }
     shootTop() {
         if (this.game.ammo > 0) {
-            this.projectiles.push(new Projectile(this.game, this.x, this.y));
+            this.projectiles.push(new Projectile(this.game, this.x +80, this.y +50));
             this.game.ammo --;
         }
     }
