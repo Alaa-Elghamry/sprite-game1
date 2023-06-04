@@ -2,6 +2,7 @@
 import { Projectile } from './Projectile.js';
 const playerImage = new Image();
 playerImage.src = 'assets/imgs/player.png';
+
 export class Player {
     constructor(game) {
         this.game = game;
@@ -20,8 +21,12 @@ export class Player {
         this.maxSpeed = 2;
         this.projectiles = []
 
+        this.powerUp =false;
+        this.powerUpTimer =0;
+        this.powerUpLimit =10000;
+
     }
-    update() {
+    update(deltaTime) {
         if (this.game.keys.includes('ArrowUp')) this.speedY = -this.maxSpeed;
         else if (this.game.keys.includes('ArrowDown')) this.speedY = this.maxSpeed;
         else this.speedY = 0
@@ -31,7 +36,11 @@ export class Player {
         else if (this.game.keys.includes('ArrowLeft')) this.speedX = this.maxSpeed;
         else this.speedX = 0
         this.x -= this.speedX;
-
+  if (this.y > this.game.height - this.height * 0.5) {
+    this.y = this.game.height - this.height * 0.5
+  }
+        
+        else if (this.y < -this.height * 0.5) this.y = -this.height * 0.5;
         // Handle Projectiles
         this.projectiles.forEach(projectile => {
             projectile.update()
@@ -42,9 +51,21 @@ export class Player {
         //sprite animation
     if (this.frameX <  this.maxFrame){
          this.frameX++;
-    } else
-         this.frameX = 0;
-    
+    } else this.frameX = 0;
+
+
+     // power Up
+     if (this.powerUp) {
+         if (this.powerUpTimer > this.powerUpLimit) {
+           this.powerUpTimer=0;
+           this.powerUp = false;
+           this.frameY = 0;
+         
+     }else {
+        this.powerUpTimer +=deltaTime ;
+        this.frameY = 1;
+        this.game.ammo += 0.1;
+     }} 
     }
     draw(context) {
         // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
@@ -60,5 +81,10 @@ export class Player {
             this.projectiles.push(new Projectile(this.game, this.x +80, this.y +50));
             this.game.ammo --;
         }
+    }
+    enterPowerup(){
+        this.powerUp = true;
+        this.powerUpTimer = 0;
+        this.game.ammo = this.game.maxAmmo;        
     }
 }
