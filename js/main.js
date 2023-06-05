@@ -64,12 +64,6 @@ window.addEventListener('load', function () {
           enemy.markedForDeletion = true;
           
           if (enemy.type = 'lucky') {
-          console.log(enemy.type);
-
-          this.player.enterPowerup();
-        }
-        else {this.score-- ;};
-          if (enemy.type = 'lucky') {
             console.log(enemy.type);
             this.player.enterPowerUp();
           } else {this.score-- ;}

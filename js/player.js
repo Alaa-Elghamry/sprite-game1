@@ -82,7 +82,7 @@ export class Player {
             this.game.ammo --;
         }
     }
-    enterPowerup(){
+    enterPowerUp(){
         this.powerUp = true;
         this.powerUpTimer = 0;
         this.game.ammo = this.game.maxAmmo;        
