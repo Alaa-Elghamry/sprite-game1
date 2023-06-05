@@ -66,10 +66,20 @@ window.addEventListener('load', function () {
           
           if (enemy.type === 'lucky') {
             this.player.enterPowerUp();
-          } else {
+          } else if(enemy.type !== 'lucky' && this.score>0) {
             this.score-- ;
-            this.lives-- ;
           }
+          /////////////////////////////
+          if(enemy.type !== 'lucky' &&  this.lives > 0){
+            this.lives-- ;
+            console.log(this.lives);
+
+          }
+        }
+
+        if (this.lives ===0) {
+          this.gameOver = true;
+          
         }
         this.player.projectiles.forEach(projectile => {
           if (this.checkColllision(projectile,enemy)) {

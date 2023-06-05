@@ -47,7 +47,7 @@ export class UI {
              
                   });
 
-            } else {
+            } else if (this.game.lives === 0) {
                 message1 = 'You Lose!';
                 message2 = "Better Luck Next Time";
             }
