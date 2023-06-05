@@ -10,8 +10,8 @@ export class Player {
         this.x = 20;
         this.y = 250;
         this.image = document.getElementById('player');
-        this.frameX= 0;
-        this.frameY  = 0;
+        this.frameX = 0;
+        this.frameY = 0;
         this.maxFrame = 37
 
         this.speedY = 0;
@@ -19,9 +19,12 @@ export class Player {
         this.speedY = 0;
         this.maxSpeed = 2;
         this.projectiles = []
+        this.powerUp = false;
+        this.powerUpTimer = 0
+        this.powerUpLimit = 10000; // 1 second
 
     }
-    update() {
+    update(deltaTime) {
         if (this.game.keys.includes('ArrowUp')) this.speedY = -this.maxSpeed;
         else if (this.game.keys.includes('ArrowDown')) this.speedY = this.maxSpeed;
         else this.speedY = 0
@@ -40,25 +43,41 @@ export class Player {
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
 
         //sprite animation
-    if (this.frameX <  this.maxFrame){
-         this.frameX++;
-    } else
-         this.frameX = 0;
-    
+        if (this.frameX < this.maxFrame) {
+            this.frameX++;
+        } else this.frameX = 0;
+
+        // power up
+        if (this.powerUp) {
+            if (this.powerUpTimer > this.powerUpLimit) {
+                this.powerupTimer = 0;
+                this.powerUp = false;
+                this.frameY = 0;
+            } else {
+                this.powerUpTimer += deltaTime; // increasing by delta time
+                this.frameY = 1;
+                this.game.ammo += 0.1;  // faster recharge
+            }
+        }
+
     }
     draw(context) {
         // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
         context.drawImage(playerImage, this.frameX * this.width, this.frameY * this.height, this.
-       width, this.height, this.x, this.y, this.width,this.height)
-             
+            width, this.height, this.x, this.y, this.width, this.height)
+
         this.projectiles.forEach(projectile => {
             projectile.draw(context)
         })
     }
     shootTop() {
         if (this.game.ammo > 0) {
-            this.projectiles.push(new Projectile(this.game, this.x +80, this.y +50));
-            this.game.ammo --;
-        }
-    }
+            this.projectiles.push(new Projectile(this.game, this.x + 80, this.y + 50));
+            this.game.ammo--;
+        }}
+        enterPowerUp(){
+            this.powerUpTimer = 0;
+            this.powerUp = true;
+            this.game.ammo = this.game.maxAmmo;
+           }
 }

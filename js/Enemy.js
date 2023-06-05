@@ -1,8 +1,8 @@
 export class Enemy{
   constructor(game){
     this.game = game;
-     this.x =  this.game.width;   
-     this.speedX = Math.random() * -1.5 - 1.5;
+    this.x =  this.game.width;   
+    this.speedX = Math.random() * -1.5 - 1.5;
     this.markedForDeletion= false;
     this.frameX = 0;
     this.frameY = 0;
@@ -65,6 +65,6 @@ export class LuckyFish extends Enemy {
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('lucky');
         this.frameY = Math.floor(Math.random() * 3);
-        this.type = 'lucky'
+        this.type = 'lucky' ;
     }
 }

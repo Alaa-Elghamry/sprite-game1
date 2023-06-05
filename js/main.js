@@ -43,7 +43,7 @@ window.addEventListener('load', function () {
       
     }
     update(deltaTime) {
-      this.player.update();
+      this.player.update(deltaTime);
       this.background.update();
       this.background.layer4.update();
       if (this.ammoTimer > this.ammoInterval) {
@@ -55,11 +55,15 @@ window.addEventListener('load', function () {
         this.ammoTimer += deltaTime;
       }
       
-
+    // check for collision with enemies 
       this.enemies.forEach(enemy => {
         enemy.update()
         if (this.checkColllision(this.player,enemy)) {
-          enemy.markedForDeletion = true
+          enemy.markedForDeletion = true;
+          if (enemy.type = 'lucky') {
+            console.log(enemy.type);
+            this.player.enterPowerUp();
+          } else {this.score-- ;}
         }
         this.player.projectiles.forEach(projectile => {
           if (this.checkColllision(projectile,enemy)) {
