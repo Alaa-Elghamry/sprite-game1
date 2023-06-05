@@ -2,6 +2,7 @@
 import { Projectile } from './Projectile.js';
 const playerImage = new Image();
 playerImage.src = 'assets/imgs/player.png';
+
 export class Player {
     constructor(game) {
         this.game = game;
@@ -19,9 +20,10 @@ export class Player {
         this.speedY = 0;
         this.maxSpeed = 2;
         this.projectiles = []
-        this.powerUp = false;
-        this.powerUpTimer = 0
-        this.powerUpLimit = 10000; // 1 second
+
+        this.powerUp =false;
+        this.powerUpTimer =0;
+        this.powerUpLimit =10000;
 
     }
     update(deltaTime) {
@@ -34,7 +36,11 @@ export class Player {
         else if (this.game.keys.includes('ArrowLeft')) this.speedX = this.maxSpeed;
         else this.speedX = 0
         this.x -= this.speedX;
-
+  if (this.y > this.game.height - this.height * 0.5) {
+    this.y = this.game.height - this.height * 0.5
+  }
+        
+        else if (this.y < -this.height * 0.5) this.y = -this.height * 0.5;
         // Handle Projectiles
         this.projectiles.forEach(projectile => {
             projectile.update()
@@ -43,23 +49,23 @@ export class Player {
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
 
         //sprite animation
-        if (this.frameX < this.maxFrame) {
-            this.frameX++;
-        } else this.frameX = 0;
+    if (this.frameX <  this.maxFrame){
+         this.frameX++;
+    } else this.frameX = 0;
 
-        // power up
-        if (this.powerUp) {
-            if (this.powerUpTimer > this.powerUpLimit) {
-                this.powerupTimer = 0;
-                this.powerUp = false;
-                this.frameY = 0;
-            } else {
-                this.powerUpTimer += deltaTime; // increasing by delta time
-                this.frameY = 1;
-                this.game.ammo += 0.1;  // faster recharge
-            }
-        }
 
+     // power Up
+     if (this.powerUp) {
+         if (this.powerUpTimer > this.powerUpLimit) {
+           this.powerUpTimer=0;
+           this.powerUp = false;
+           this.frameY = 0;
+         
+     }else {
+        this.powerUpTimer +=deltaTime ;
+        this.frameY = 1;
+        this.game.ammo += 0.1;
+     }} 
     }
     draw(context) {
         // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
@@ -72,12 +78,13 @@ export class Player {
     }
     shootTop() {
         if (this.game.ammo > 0) {
-            this.projectiles.push(new Projectile(this.game, this.x + 80, this.y + 50));
-            this.game.ammo--;
-        }}
-        enterPowerUp(){
-            this.powerUpTimer = 0;
-            this.powerUp = true;
-            this.game.ammo = this.game.maxAmmo;
-           }
+            this.projectiles.push(new Projectile(this.game, this.x +80, this.y +50));
+            this.game.ammo --;
+        }
+    }
+    enterPowerup(){
+        this.powerUp = true;
+        this.powerUpTimer = 0;
+        this.game.ammo = this.game.maxAmmo;        
+    }
 }

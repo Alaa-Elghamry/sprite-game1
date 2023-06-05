@@ -1,3 +1,6 @@
+const projectileImage = new Image();
+projectileImage.src = 'assets/imgs/projectile.png';
+
 
 export class Projectile {
     constructor(game, x, y){
@@ -18,8 +21,7 @@ export class Projectile {
     }
 
     draw(context) {
-        context.fillStyle = 'yellow';
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(projectileImage, this.x, this.y)
     }
 
 }

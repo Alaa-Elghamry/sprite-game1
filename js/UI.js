@@ -2,7 +2,7 @@ export class UI {
     constructor(game) {
         this.game = game;
         this.fontSize = 25;
-        this.fontFamily = 'Helvetica';
+        this.fontFamily = 'Bangers';
         this.color = 'white';
     }
     draw(context) {
@@ -23,19 +23,29 @@ export class UI {
         }
 
         if (this.game.gameOver) {
-            context.textAlign = 'center';
+            // context.textAlign = 'center';
             let message1;
             let message2;
             if (this.game.score > this.game.winningScore) {
                 message1 = 'You Win!';
                 message2 = "Well Done";
+
+                this.game.enemies.forEach(enemy => {    
+                      enemy.markedForDeletion = true;             
+                    this.game.player.projectiles.forEach(projectile => {
+                        projectile.markedForDeletion = true;                    
+                  })
+             
+                  });
+
             } else {
                 message1 = 'You Lose!';
                 message2 = "Better Luck Next Time";
             }
-        context.font = '50px ' + this.fontFamily;
+            
+        context.font = '80px ' + this.fontFamily;
         context.fillText(message1,this.game.width * 0.5 ,this.game.height * 0.5 - 40 )
-        context.font = '20px ' + this.fontFamily;
+        context.font = '45px ' + this.fontFamily;
         context.fillText(message2,this.game.width * 0.5 ,this.game.height * 0.5 + 40)
         }
 

@@ -1,4 +1,4 @@
-import { Player } from './Player.js';
+import { Player } from './player.js';
 import { UI } from './UI.js';
 import { Projectile } from './Projectile.js';
 import { InputHandler } from './InputHandle.js';
@@ -46,6 +46,8 @@ window.addEventListener('load', function () {
       this.player.update(deltaTime);
       this.background.update();
       this.background.layer4.update();
+
+      /// Handle ammo recharge
       if (this.ammoTimer > this.ammoInterval) {
         if (this.ammo < this.maxAmmo) {
           this.ammo++;
@@ -60,6 +62,13 @@ window.addEventListener('load', function () {
         enemy.update()
         if (this.checkColllision(this.player,enemy)) {
           enemy.markedForDeletion = true;
+          
+          if (enemy.type = 'lucky') {
+          console.log(enemy.type);
+
+          this.player.enterPowerup();
+        }
+        else {this.score-- ;};
           if (enemy.type = 'lucky') {
             console.log(enemy.type);
             this.player.enterPowerUp();

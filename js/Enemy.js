@@ -39,6 +39,8 @@ export class Angler1 extends Enemy {
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler1');
         this.frameY = Math.floor(Math.random() * 3);
+        this.type ='Angler1';
+
 
     }
 }
@@ -52,6 +54,7 @@ export class Angler2 extends Enemy {
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler2');
         this.frameY = Math.floor(Math.random() * 3);
+        this.type ='Angler2';
 
     }
 }
