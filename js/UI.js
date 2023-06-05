@@ -1,11 +1,20 @@
+const heartImage = new Image();
+heartImage.src = 'assets/imgs/heart.png';
+
 export class UI {
     constructor(game) {
         this.game = game;
         this.fontSize = 25;
         this.fontFamily = 'Bangers';
         this.color = 'white';
+
     }
     draw(context) {
+        // Lives 
+        for (let i = 0; i < this.game.lives; i++) {
+            context.drawImage(heartImage,70 * i +25, 95,45,45)
+        }
+
         context.save();
         context.fillstyle = this.color;
         context.shadowOffsetX = 2;

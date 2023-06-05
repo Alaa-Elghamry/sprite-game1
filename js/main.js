@@ -33,6 +33,7 @@ window.addEventListener('load', function () {
       this.score = 0
       this.winningScore = 50;
       this.gameOver = false;
+      this.lives = 3;
 
       this.player = new Player(this);
       this.projectile = new Projectile(this);
@@ -63,10 +64,12 @@ window.addEventListener('load', function () {
         if (this.checkColllision(this.player,enemy)) {
           enemy.markedForDeletion = true;
           
-          if (enemy.type = 'lucky') {
-            console.log(enemy.type);
+          if (enemy.type === 'lucky') {
             this.player.enterPowerUp();
-          } else {this.score-- ;}
+          } else {
+            this.score-- ;
+            this.lives-- ;
+          }
         }
         this.player.projectiles.forEach(projectile => {
           if (this.checkColllision(projectile,enemy)) {
