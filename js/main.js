@@ -49,18 +49,18 @@ window.addEventListener('load', function () {
       this.background.layer4.update();
 
       /// Handle ammo recharge
-      if (this.ammoTimer > this.ammoInterval) {
-        if (this.ammo < this.maxAmmo) {
-          this.ammo++;
-          this.ammoTimer = 0;
-        }
-      } else {
-        this.ammoTimer += deltaTime;
-      }
+      // if (this.ammoTimer > this.ammoInterval) {
+      //   if (this.ammo < this.maxAmmo) {
+      //     this.ammo++;
+      //     this.ammoTimer = 0;
+      //   }
+      // } else {
+      //   this.ammoTimer += deltaTime;
+      // }
       
     // check for collision with enemies 
       this.enemies.forEach(enemy => {
-        enemy.update()
+        enemy.update();
         if (this.checkColllision(this.player,enemy)) {
           enemy.markedForDeletion = true;
           
@@ -69,10 +69,11 @@ window.addEventListener('load', function () {
           } else if(enemy.type !== 'lucky' && this.score>0) {
             this.score-- ;
           }
-          /////////////////////////////
+          ///////////////////////////////////////////////////
           if(enemy.type !== 'lucky' &&  this.lives > 0){
             this.lives-- ;
             console.log(this.lives);
+            console.log(this.checkColllision(this.player,enemy));
 
           }
         }
@@ -123,12 +124,16 @@ window.addEventListener('load', function () {
     }
 
     addEnemy(){
-      const randomize = Math.random()
-if (randomize < 0.3) {
+      const randomize = Math.random();
+if (randomize < 0.5) {
   this.enemies.push(new Angler1(this));
-    } else if (randomize < 0.6) {
-      this.enemies.push(new Angler2(this));
-    } else  this.enemies.push(new LuckyFish(this));
+    }
+  //  else if (randomize < 0.7) {
+  //     this.enemies.push(new Angler2(this));
+  //   } 
+  //   else {
+  //     this.enemies.push(new LuckyFish(this));
+  //   }
     }  
     checkColllision (rect1,rect2){
       return (rect1.x < rect2.x + rect2.width &&

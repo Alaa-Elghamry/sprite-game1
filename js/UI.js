@@ -1,5 +1,5 @@
 const heartImage = new Image();
-heartImage.src = 'assets/imgs/heart.png';
+heartImage.src = 'assets/imgs/level.png';
 
 export class UI {
     constructor(game) {

@@ -13,7 +13,7 @@ export class Player {
         this.image = document.getElementById('player');
         this.frameX = 0;
         this.frameY = 0;
-        this.maxFrame = 37
+        this.maxFrame = 37;
 
         this.speedY = 0;
         this.speedX = 0;
@@ -85,6 +85,8 @@ export class Player {
     enterPowerUp(){
         this.powerUp = true;
         this.powerUpTimer = 0;
-        this.game.ammo = this.game.maxAmmo;        
+        this.game.ammo = this.game.maxAmmo;      
+        // this.game.lives++ ;
+
     }
 }
