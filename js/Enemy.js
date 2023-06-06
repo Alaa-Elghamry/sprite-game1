@@ -1,7 +1,7 @@
 export class Enemy{
   constructor(game){
     this.game = game;
-    this.x =  this.game.width;   
+    this.x =this.game.width;   
     this.speedX = Math.random() * -1.5 - 1.5;
     this.markedForDeletion= false;
     this.frameX = 0;
@@ -20,6 +20,7 @@ update(){
    
 }
 draw(context){
+
     context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
      
     context.fillStyle ='black'
@@ -53,7 +54,7 @@ export class Angler2 extends Enemy {
         this.lives = 2;
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler2');
-        this.frameY = Math.floor(Math.random() * 3);
+        this.frameY = Math.floor(Math.random() * 2);
         this.type ='Angler2';
 
     }
@@ -67,7 +68,7 @@ export class LuckyFish extends Enemy {
         this.lives = 3;
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('lucky');
-        this.frameY = Math.floor(Math.random() * 3);
+        this.frameY = Math.floor(Math.random() * 2);
         this.type = 'lucky' ;
     }
 }

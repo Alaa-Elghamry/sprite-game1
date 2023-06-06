@@ -17,7 +17,6 @@ export class Player {
 
         this.speedY = 0;
         this.speedX = 0;
-        this.speedY = 0;
         this.maxSpeed = 2;
         this.projectiles = []
 
@@ -36,11 +35,17 @@ export class Player {
         else if (this.game.keys.includes('ArrowLeft')) this.speedX = this.maxSpeed;
         else this.speedX = 0
         this.x -= this.speedX;
+
+////////////////// Game Borders /////////////////////////     
   if (this.y > this.game.height - this.height * 0.5) {
     this.y = this.game.height - this.height * 0.5
-  }
-        
-        else if (this.y < -this.height * 0.5) this.y = -this.height * 0.5;
+  }else if (this.y < -this.height * 0.5) this.y = -this.height * 0.5;
+
+  if (this.x < this.game.x) {
+    this.x = this.game.x;
+  }else if (this.x > this.game.width - this.width) {
+    this.x = this.game.width - this.width;
+  }        
         // Handle Projectiles
         this.projectiles.forEach(projectile => {
             projectile.update()
@@ -48,7 +53,7 @@ export class Player {
 
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
 
-        //sprite animation
+    //sprite animation
     if (this.frameX <  this.maxFrame){
          this.frameX++;
     } else this.frameX = 0;
@@ -64,11 +69,11 @@ export class Player {
      }else {
         this.powerUpTimer +=deltaTime ;
         this.frameY = 1;
-        this.game.ammo += 0.1;
+        // this.game.ammo += 0.1;
      }} 
     }
     draw(context) {
-        // context.drawImage(playerImage,0,0,this.width,this.height, this.x, this.y, this.width,this.height);
+        // context.strokeRect(this.x, this.y, this.width, this.height);
         context.drawImage(playerImage, this.frameX * this.width, this.frameY * this.height, this.
             width, this.height, this.x, this.y, this.width, this.height)
 
@@ -85,8 +90,10 @@ export class Player {
     enterPowerUp(){
         this.powerUp = true;
         this.powerUpTimer = 0;
-        this.game.ammo = this.game.maxAmmo;      
-        // this.game.lives++ ;
+        this.game.ammo = this.game.maxAmmo;
+        if (this.game.lives <3) {
+            this.game.lives++ ;
+        }      
 
     }
 }

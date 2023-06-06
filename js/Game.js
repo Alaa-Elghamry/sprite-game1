@@ -24,14 +24,14 @@ window.addEventListener('load', function () {
       this.keys = [];
       this.enemies = [];
       this.enemyTimer = 0;
-      this.enemyInterval = 1000;
+      this.enemyInterval = 2000;
       this.speed = 1 ;
-      this.ammo = 20;
-      this.maxAmmo = 50;
+      this.ammo = 80;
+      this.maxAmmo = 100;
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.score = 0
-      this.winningScore = 50;
+      this.winningScore = 150;
       this.gameOver = false;
       this.lives = 3;
 
@@ -44,7 +44,9 @@ window.addEventListener('load', function () {
       
     }
     update(deltaTime) {
+      
       this.player.update(deltaTime);
+      this.projectile.update();
       this.background.update();
       this.background.layer4.update();
 
@@ -72,9 +74,8 @@ window.addEventListener('load', function () {
           ///////////////////////////////////////////////////
           if(enemy.type !== 'lucky' &&  this.lives > 0){
             this.lives-- ;
-            console.log(this.lives);
-            console.log(this.checkColllision(this.player,enemy));
-
+            // this.player.clearRect(this.x, this.y, this.width, this.height)
+            
           }
         }
 
@@ -100,11 +101,13 @@ window.addEventListener('load', function () {
 
 
 
-     // filter the marked for deletion enemies from the array
+     //////////////////// filter the marked for deletion enemies from the array ///////////////////////////
       this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion );
 
-      if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
-        this.addEnemy();
+      if (this.enemyTimer > this.enemyInterval && !this.gameOver) {   
+
+          this.addEnemy();
+     
         this.enemyTimer = 0;
       }else{
         this.enemyTimer += deltaTime;
@@ -112,7 +115,8 @@ window.addEventListener('load', function () {
     }
 
     draw(context) {
-      // this.update()
+      context.textAlign = 'center';
+
       this.background.draw(context);
       this.player.draw(context);
       this.ui.draw(context);
@@ -124,16 +128,16 @@ window.addEventListener('load', function () {
     }
 
     addEnemy(){
-      const randomize = Math.random();
-if (randomize < 0.5) {
+      const randomize = Math.random() * 10;
+if (randomize < 4) {
   this.enemies.push(new Angler1(this));
     }
-  //  else if (randomize < 0.7) {
-  //     this.enemies.push(new Angler2(this));
-  //   } 
-  //   else {
-  //     this.enemies.push(new LuckyFish(this));
-  //   }
+   else if (randomize < 7) {
+      this.enemies.push(new Angler2(this));
+    } 
+    else if (randomize <9 ) {
+      this.enemies.push(new LuckyFish(this));
+    }
     }  
     checkColllision (rect1,rect2){
       return (rect1.x < rect2.x + rect2.width &&

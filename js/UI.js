@@ -10,11 +10,12 @@ export class UI {
 
     }
     draw(context) {
+
         // Lives 
         for (let i = 0; i < this.game.lives; i++) {
             context.drawImage(heartImage,70 * i +25, 95,45,45)
         }
-
+   
         context.save();
         context.fillstyle = this.color;
         context.shadowOffsetX = 2;
@@ -24,7 +25,7 @@ export class UI {
         context.fillStyle = this.color;
         context.font = this.fontSize + 'px ' + this.fontFamily;
 
-        context.fillText('Score: ' + this.game.score, 20, 40);
+        context.fillText('Score: ' + this.game.score, 60, 40);
         // ammo
         context.fillStyle = this.color;
         for (let i = 0; i < this.game.ammo; i++) {
@@ -35,23 +36,24 @@ export class UI {
             // context.textAlign = 'center';
             let message1;
             let message2;
+            this.game.enemies.forEach(enemy => {    
+                  enemy.markedForDeletion = true;             
+                this.game.player.projectiles.forEach(projectile => {
+                    projectile.markedForDeletion = true;                    
+              })
+         
+              });
             if (this.game.score > this.game.winningScore) {
                 message1 = 'You Win!';
                 message2 = "Well Done";
 
-                this.game.enemies.forEach(enemy => {    
-                      enemy.markedForDeletion = true;             
-                    this.game.player.projectiles.forEach(projectile => {
-                        projectile.markedForDeletion = true;                    
-                  })
-             
-                  });
 
             } else if (this.game.lives === 0) {
                 message1 = 'You Lose!';
                 message2 = "Better Luck Next Time";
+                this.game.player.maxSpeed = 0;
             }
-            
+        context.fillText('Score: ' + this.game.score, 60, 40);
         context.font = '80px ' + this.fontFamily;
         context.fillText(message1,this.game.width * 0.5 ,this.game.height * 0.5 - 40 )
         context.font = '45px ' + this.fontFamily;
