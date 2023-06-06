@@ -96,4 +96,23 @@ export class Player {
         }      
 
     }
+    resetPlayer() {
+        this.maxSpeed = 0;
+  
+        //// Resrt Player
+        this.projectiles = [];
+        this.x = 20;
+        this.y = 250;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.maxSpeed = 2;
+        this.powerUp =false;
+        this.powerUpTimer =0;
+        this.powerUpLimit =10000;
+        this.frameX = 0;
+        this.frameY = 0;
+
+
+        
+    }
 }

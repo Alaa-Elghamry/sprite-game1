@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
       this.maxAmmo = 100;
       this.ammoTimer = 0;
       this.ammoInterval = 500;
-      this.score = 0
+      this.score = 0;
       this.winningScore = 150;
       this.gameOver = false;
       this.lives = 3;
@@ -146,6 +146,24 @@ if (randomize < 4) {
           rect1.y + rect1.height > rect2.y )  
       
     }
+    resetGame() {
+    
+      //// Reset Game
+      this.enemies = [];
+      this.keys = [];
+      this.score = 0;
+      this.lives = 3;
+      this.gameOver = false;
+      this.enemyTimer = 0;
+      this.enemyInterval = 2000;
+      this.speed = 1 ;
+      this.ammo = 80;
+      this.maxAmmo = 100;
+      this.ammoTimer = 0;
+      this.ammoInterval = 500;
+
+      
+  }
   }
 
   const game = new Game(canvas.width, canvas.height);

@@ -36,22 +36,30 @@ export class UI {
             // context.textAlign = 'center';
             let message1;
             let message2;
+
             this.game.enemies.forEach(enemy => {    
-                  enemy.markedForDeletion = true;             
-                this.game.player.projectiles.forEach(projectile => {
-                    projectile.markedForDeletion = true;                    
-              })
-         
-              });
+                enemy.markedForDeletion = true;             
+              this.game.player.projectiles.forEach(projectile => {
+                  projectile.markedForDeletion = true;                    
+            })
+       
+            });
             if (this.game.score > this.game.winningScore) {
                 message1 = 'You Win!';
-                message2 = "Well Done";
-
+                message2 = "Well Done Explorer";
+      
+                setTimeout(() => {
+                    this.game.resetGame();
+                    this.game.player.resetPlayer();
+                }, 3000);
 
             } else if (this.game.lives === 0) {
                 message1 = 'You Lose!';
                 message2 = "Better Luck Next Time";
-                this.game.player.maxSpeed = 0;
+                setTimeout(() => {
+                  this.game.resetGame();
+                  this.game.player.resetPlayer();
+                }, 3000);
             }
         context.fillText('Score: ' + this.game.score, 60, 40);
         context.font = '80px ' + this.fontFamily;
@@ -61,4 +69,5 @@ export class UI {
         }
 
     }
+
 }
