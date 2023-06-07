@@ -3,8 +3,8 @@ class Layer {
        this.game = game;
        this.image = image;
        this.speedModifier = speedModifier;
-       this.width = 1768;
-       this.height = 500;
+       this.width = 1800;
+       this.height = 1000;
        this.x=0;
        this.y = 0;
     }
@@ -25,11 +25,13 @@ class Layer {
         this.image2 = document.getElementById('layer2');
         this.image3 = document.getElementById('layer3');
         this.image4 = document.getElementById('layer4');
+        this.image5 = document.getElementById('layer5');
        this.layer1 = new Layer(this.game, this.image1, 1);
        this.layer2 = new Layer(this.game, this.image2, 0.4);
        this.layer3 = new Layer(this.game, this.image3, 1.2);
        this.layer4 = new Layer(this.game, this.image4, 1.3);
-       this.layers = [this.layer1,this.layer2,this.layer3];
+       this.layer5 = new Layer(this.game, this.image5, 1.3);
+       this.layers = [this.layer1,this.layer2,this.layer3,this.layer4];
     }
    update(){
        this.layers.forEach(layer => layer.update());

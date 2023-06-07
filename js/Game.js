@@ -10,8 +10,8 @@ import { Background } from './Background.js';
 window.addEventListener('load', function () {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
-  canvas.width = 1280;
-  canvas.height = 500;
+  canvas.width = 1800;
+  canvas.height = 1000;
 
 
   // Main Game Class
@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.score = 0;
-      this.winningScore = 150;
+      this.winningScore = 100;
       this.gameOver = false;
       this.lives = 3;
 
@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
       this.player.update(deltaTime);
       this.projectile.update();
       this.background.update();
-      this.background.layer4.update();
+      this.background.layer5.update();
 
       /// Handle ammo recharge
       // if (this.ammoTimer > this.ammoInterval) {
@@ -123,7 +123,7 @@ window.addEventListener('load', function () {
       this.enemies.forEach(enemy => {
         enemy.draw(context)
       });
-      this.background.layer4.draw(context);
+      this.background.layer5.draw(context);
 
     }
 

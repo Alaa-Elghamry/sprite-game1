@@ -17,7 +17,7 @@ export class Player {
 
         this.speedY = 0;
         this.speedX = 0;
-        this.maxSpeed = 2;
+        this.maxSpeed = 10;
         this.projectiles = []
 
         this.powerUp =false;
@@ -111,8 +111,6 @@ export class Player {
         this.powerUpLimit =10000;
         this.frameX = 0;
         this.frameY = 0;
-
-
         
     }
 }
