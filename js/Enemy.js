@@ -33,14 +33,17 @@ draw(context){
 export class Angler1 extends Enemy {
     constructor (game) {
         super(game);
-        this.width = 228;
-        this.height = 169;
+        this.width = 208;
+        this.height = 234;
         this.score = 3;
         this.lives = 3;
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler1');
-        this.frameY = Math.floor(Math.random() * 3);
+        // this.frameY = Math.floor(Math.random() * 3);
         this.type ='Angler1';
+        this.maxFrame = 11;
+        // this.speedX = Math.random() * -1.5 - 1.5;
+
 
 
     }
