@@ -21,8 +21,17 @@ update(){
 }
 draw(context){
 
-    context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
-     
+    // context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
+    context.drawImage(this.image, 
+        this.frameX * 180,
+         0,
+         180, 
+         200,
+         this.x, 
+         this.y,
+         this.width,
+         this.height)
+
     context.fillStyle ='black'
     context.font = '20px Helvatica'
     // context.fillText(this.lives,this.x, this.y)
@@ -33,8 +42,8 @@ draw(context){
 export class Angler1 extends Enemy {
     constructor (game) {
         super(game);
-        this.width = 208;
-        this.height = 234;
+        this.width = 180;
+        this.height = 200;
         this.score = 3;
         this.lives = 3;
         this.y = Math.random() * (this.game.height * 0.9 - this.height);

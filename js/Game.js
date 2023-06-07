@@ -133,10 +133,10 @@ if (randomize < 4) {
   this.enemies.push(new Angler1(this));
     }
    else if (randomize < 7) {
-      this.enemies.push(new Angler2(this));
+      // this.enemies.push(new Angler2(this));
     } 
     else if (randomize <9 ) {
-      this.enemies.push(new LuckyFish(this));
+      // this.enemies.push(new LuckyFish(this));
     }
     }  
     checkColllision (rect1,rect2){
