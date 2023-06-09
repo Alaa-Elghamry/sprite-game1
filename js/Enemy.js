@@ -6,27 +6,37 @@ export class Enemy{
     this.markedForDeletion= false;
     this.frameX = 0;
     this.frameY = 0;
-    this.maxFrame = 37;
+    this.timer =0;
+    this.fps= 3;
+    this.interval = 1000/this.fps;
+
 
  }
-update(){
+update(deltaTime){
      this.x += this.speedX - this.game.speed;
      if (this.x + this.width < 0) this.markedForDeletion = true;
 
     //sprite animation
-    if (this.frameX <  this.maxFrame){
+    if (this.timer > this.interval){
         this.frameX++;
-   } else this.frameX = 0; 
+        this.timer =0;
+   } else {
+    // this.frameX = 0;
+    this.timer += deltaTime;
+ }
+    if (this.frameX >  this.maxFrame){
+    this.frameX = 0;
+ }
    
 }
 draw(context){
 
     // context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
     context.drawImage(this.image, 
-        this.frameX * 180,
+        this.frameX * this.width,
          0,
-         180, 
-         200,
+         this.width,
+         this.height,
          this.x, 
          this.y,
          this.width,
@@ -42,15 +52,16 @@ draw(context){
 export class Angler1 extends Enemy {
     constructor (game) {
         super(game);
-        this.width = 180;
-        this.height = 200;
+        this.width = 500;
+        this.height = 770;
         this.score = 3;
         this.lives = 3;
+        this.maxFrame = 11;
+
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler1');
         // this.frameY = Math.floor(Math.random() * 3);
         this.type ='Angler1';
-        this.maxFrame = 11;
         // this.speedX = Math.random() * -1.5 - 1.5;
 
 

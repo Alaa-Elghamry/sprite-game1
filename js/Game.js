@@ -62,7 +62,7 @@ window.addEventListener('load', function () {
       
     // check for collision with enemies 
       this.enemies.forEach(enemy => {
-        enemy.update();
+        enemy.update(deltaTime);
         if (this.checkColllision(this.player,enemy)) {
           enemy.markedForDeletion = true;
           
