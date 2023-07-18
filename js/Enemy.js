@@ -7,8 +7,7 @@ export class Enemy{
     this.frameX = 0;
     this.frameY = 0;
     this.timer =0;
-    this.fps= 3;
-    this.interval = 1000/this.fps;
+    this.maxFrame =37;
 
 
  }
@@ -26,25 +25,28 @@ update(deltaTime){
  }
     if (this.frameX >  this.maxFrame){
     this.frameX = 0;
+ }else{
+    this.frameX++;
+
  }
    
 }
 draw(context){
 
-    // context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
-    context.drawImage(this.image, 
-        this.frameX * this.width,
-         0,
-         this.width,
-         this.height,
-         this.x, 
-         this.y,
-         this.width,
-         this.height)
+    context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height,this.width,this.height, this.x, this.y, this.width,this.height)  
+    // context.drawImage(this.image, 
+    //     this.frameX * this.width,
+    //      0,
+    //      this.width,
+    //      this.height,
+    //      this.x, 
+    //      this.y,
+    //      this.width,
+    //      this.height)
 
     context.fillStyle ='black'
     context.font = '20px Helvatica'
-    // context.fillText(this.lives,this.x, this.y)
+    context.fillText(this.lives,this.x, this.y)
  }
 
 }
@@ -52,22 +54,25 @@ draw(context){
 export class Angler1 extends Enemy {
     constructor (game) {
         super(game);
-        this.width = 500;
-        this.height = 770;
+        this.width = 228;
+        this.height = 169;
         this.score = 3;
         this.lives = 3;
-        this.maxFrame = 11;
 
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById('angler1');
-        // this.frameY = Math.floor(Math.random() * 3);
+        this.frameY = Math.floor(Math.random() * 3);
         this.type ='Angler1';
-        // this.speedX = Math.random() * -1.5 - 1.5;
+        this.speedX = Math.random() * -1.5 - 1.5;
 
 
 
     }
 }
+
+
+
+
 export class Angler2 extends Enemy {
     constructor (game) {
         super(game);

@@ -51,14 +51,14 @@ window.addEventListener('load', function () {
       this.background.layer5.update();
 
       /// Handle ammo recharge
-      // if (this.ammoTimer > this.ammoInterval) {
-      //   if (this.ammo < this.maxAmmo) {
-      //     this.ammo++;
-      //     this.ammoTimer = 0;
-      //   }
-      // } else {
-      //   this.ammoTimer += deltaTime;
-      // }
+      if (this.ammoTimer > this.ammoInterval) {
+        if (this.ammo < this.maxAmmo) {
+          this.ammo++;
+          this.ammoTimer = 0;
+        }
+      } else {
+        this.ammoTimer += deltaTime;
+      }
       
     // check for collision with enemies 
       this.enemies.forEach(enemy => {
@@ -133,10 +133,10 @@ if (randomize < 4) {
   this.enemies.push(new Angler1(this));
     }
    else if (randomize < 7) {
-      // this.enemies.push(new Angler2(this));
+      this.enemies.push(new Angler2(this));
     } 
     else if (randomize <9 ) {
-      // this.enemies.push(new LuckyFish(this));
+      this.enemies.push(new LuckyFish(this));
     }
     }  
     checkColllision (rect1,rect2){

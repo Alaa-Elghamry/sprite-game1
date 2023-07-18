@@ -1,23 +1,23 @@
 
 import { Projectile } from './Projectile.js';
 const playerImage = new Image();
-playerImage.src = 'assets/imgs/spriteStandRight.png';
+playerImage.src = 'assets/imgs/player.png';
 
 export class Player {
     constructor(game) {
         this.game = game;
-        this.width = 66;
-        this.height = 150;
+        this.width = 120;
+        this.height = 190;
         this.x = 20;
         this.y = 250;
         this.image = document.getElementById('player');
         this.frameX = 0;
         this.frameY = 0;
-        this.maxFrame = 28;
+        this.maxFrame = 37;
 
         this.speedY = 0;
         this.speedX = 0;
-        this.maxSpeed = 10;
+        this.maxSpeed = 3;
         this.projectiles = []
 
         this.powerUp =false;
@@ -75,10 +75,10 @@ export class Player {
     draw(context) {
         // context.strokeRect(this.x, this.y, this.width, this.height);
         context.drawImage(playerImage, 
-            this.frameX * 177,
-             0,
-             177, 
-             400,
+            this.frameX * this.width,
+            this.frameY * this.width,
+            this.width,
+            this.height,
              this.x, 
              this.y,
              this.width,
