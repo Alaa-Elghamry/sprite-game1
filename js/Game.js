@@ -10,8 +10,8 @@ import { Background } from './Background.js';
 window.addEventListener('load', function () {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
-  canvas.width = 1800;
-  canvas.height = 1000;
+  canvas.width = 1768;
+  canvas.height = 500;
 
 
   // Main Game Class
@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
       this.player.update(deltaTime);
       this.projectile.update();
       this.background.update();
-      this.background.layer5.update();
+      this.background.layer4.update();
 
       /// Handle ammo recharge
       if (this.ammoTimer > this.ammoInterval) {
@@ -123,7 +123,7 @@ window.addEventListener('load', function () {
       this.enemies.forEach(enemy => {
         enemy.draw(context)
       });
-      this.background.layer5.draw(context);
+      this.background.layer4.draw(context);
 
     }
 
